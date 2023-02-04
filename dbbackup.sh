@@ -2,7 +2,7 @@
  
 DEST="/backup"
 dbs=`cat /root/.my.cnf| grep dbname | cut -d "=" -f 2` 
-devsrv=`cat /root/.my.cnf| grep srvname | cut -d "=" -f 2` 
+devsrv=`cat /root/.my.cnf| grep devsrv | cut -d "=" -f 2` 
 sml=`cat /root/.my.cnf| grep emailid | cut -d "=" -f 2`
 snm=`cat /root/.my.cnf| grep srvname | cut -d "=" -f 2`
 susr=`cat /root/.my.cnf| grep usrname | cut -d "=" -f 2`
