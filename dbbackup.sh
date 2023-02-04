@@ -1,11 +1,11 @@
 #!/bin/bash
  
 DEST="/backup"
-dbs=`cat /root/.my.cnf| grep dbname | cut -d "=" -f 2` 
-devsrv=`cat /root/.my.cnf| grep devsrv | cut -d "=" -f 2` 
-sml=`cat /root/.my.cnf| grep emailid | cut -d "=" -f 2`
-snm=`cat /root/.my.cnf| grep srvname | cut -d "=" -f 2`
-susr=`cat /root/.my.cnf| grep usrname | cut -d "=" -f 2`
+dbs=`cat /root/.db.txt| grep dbname | cut -d "=" -f 2` 
+devsrv=`cat /root/.db.txt| grep devsrv | cut -d "=" -f 2` 
+sml=`cat /root/.db.txt| grep emailid | cut -d "=" -f 2`
+snm=`cat /root/.db.txt| grep srvname | cut -d "=" -f 2`
+susr=`cat /root/.db.txt| grep usrname | cut -d "=" -f 2`
 
 #Check backup directory exist or not, if not then create it
 if [ ! -d /backup ];
@@ -30,7 +30,7 @@ then
   if [ $? -eq 0 ]
    then
       echo "backup Successfully done archived"
-      rsync -rvz -e 'ssh -p 48456' $DEST/$dbs$NOW.sql $susr@$devsrv:/opt/dbbackup/$snm/
+      rsync -rvz -e 'ssh -p 48456' $DEST/$dbs$NOW.sql.gz $susr@$devsrv:/opt/dbbackup/$snm/
    else
      echo "backup successfully not archived"
      echo "Prod Server DB Backup failed to archive" | mail -s "Prod Server DB Backup failed to archive" $sml
@@ -40,7 +40,5 @@ else
   echo "backup successfully not done"
   echo "Prod Server DB Backup failed" | mail -s "Prod Server DB Backup failed to archive" $sml
 fi
-
-
 
 
