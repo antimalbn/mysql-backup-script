@@ -30,7 +30,7 @@ then
   if [ $? -eq 0 ]
    then
       echo "backup Successfully done archived"
-      rsync -rvz -e 'ssh -p 48456' $DEST/$dbs$NOW.sql.gz $susr@$devsrv:/opt/dbbackup/$snm/
+      rsync -rvz -e 'ssh -i /root/dev.pem -p 48456' $DEST/$dbs$NOW.sql.gz $susr@$devsrv:/opt/dbbackup/$snm/
    else
      echo "backup successfully not archived"
      echo "Prod Server DB Backup failed to archive" | mail -s "Prod Server DB Backup failed to archive" $sml
